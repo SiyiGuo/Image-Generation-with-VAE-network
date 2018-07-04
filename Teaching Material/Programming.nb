@@ -1,0 +1,148 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      4702,        140]
+NotebookOptionsPosition[      3539,        111]
+NotebookOutlinePosition[      3882,        126]
+CellTagsIndexPosition[      3839,        123]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["[] {} ()", "Section",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+  3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+  3.7390308394123273`*^9}, {3.7390308992812843`*^9, 3.739030900043087*^9}, {
+  3.7390310317764063`*^9, 
+  3.7390310568763666`*^9}},ExpressionUUID->"163cc00d-f563-4ae0-8464-\
+3e3d2cfa5ead"],
+
+Cell["\<\
+[] functiin
+{} array
+() calculation\
+\>", "Text",
+ CellChangeTimes->{{3.739031061966734*^9, 
+  3.739031073589579*^9}},ExpressionUUID->"46639fab-ef9c-4df8-ad4d-\
+d1c134c9eeb2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["With, Module, Block", "Section",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+  3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+  3.7390308394123273`*^9}, {3.7390308992812843`*^9, 3.739030900043087*^9}, {
+  3.7390310317764063`*^9, 
+  3.739031079885419*^9}},ExpressionUUID->"beb70bda-a53c-4ae3-acec-\
+687f367064d4"],
+
+Cell["\<\
+Two set of function
+function that change environment: eg, write to file
+function that does not: eg, normal function
+$ global variable: eg, $foo
+
+With, Module, not change the outside work
+Module: Change value at bottom. 
+\tModule[{foo=x}, foo++; foo;]
+\tModule[{y},y] return just y
+With: cannot change value
+\
+\>", "Text",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+   3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+   3.7390308394123273`*^9}, {3.7390308992812843`*^9, 3.739030900043087*^9}, 
+   3.7390310317764063`*^9, {3.739031112300712*^9, 
+   3.7390311513058276`*^9}},ExpressionUUID->"61080b62-d39d-4dd8-838f-\
+35b7a5f1b257"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fold", "Section",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+  3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+  3.7390308394123273`*^9}, {3.7390308992812843`*^9, 
+  3.7390309108378477`*^9}},ExpressionUUID->"5636bcd4-a605-47d3-b3f3-\
+15440d4c2440"],
+
+Cell["Fold[fff, a, {1,2,3}]", "Text",
+ CellChangeTimes->{{3.739030914201166*^9, 3.7390309147005014`*^9}, {
+  3.7390310232097692`*^9, 
+  3.7390310292973137`*^9}},ExpressionUUID->"d08ca777-30c5-47d7-91c9-\
+af22d6d4dd45"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "Section",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+  3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+  3.7390308394123273`*^9}, {3.7390308992812843`*^9, 
+  3.7390309100312195`*^9}},ExpressionUUID->"2b9bce55-f49b-4cb3-9483-\
+94f3e5c81901"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.739030535711643*^9, 3.739030560187106*^9}, {
+  3.7390306250784893`*^9, 3.7390306380286407`*^9}, {3.739030739065753*^9, 
+  3.7390307654496374`*^9}},ExpressionUUID->"3dbcce92-2cae-4548-9971-\
+649cab39463c"],
+
+Cell["\<\
+
+\
+\>", "Text",
+ CellChangeTimes->{{3.739030535711643*^9, 
+  3.7390305611143746`*^9}},ExpressionUUID->"4984960a-3fe1-4dcb-95bb-\
+3f3b233affb2"]
+}, Open  ]]
+},
+WindowSize->{759, 833},
+WindowMargins->{{Automatic, 362}, {24, Automatic}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 7, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[583, 22, 358, 6, 67, "Section",ExpressionUUID->"163cc00d-f563-4ae0-8464-3e3d2cfa5ead"],
+Cell[944, 30, 185, 7, 78, "Text",ExpressionUUID->"46639fab-ef9c-4df8-ad4d-d1c134c9eeb2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1166, 42, 367, 6, 67, "Section",ExpressionUUID->"beb70bda-a53c-4ae3-acec-687f367064d4"],
+Cell[1536, 50, 688, 18, 254, "Text",ExpressionUUID->"61080b62-d39d-4dd8-838f-35b7a5f1b257"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2261, 73, 303, 5, 67, "Section",ExpressionUUID->"5636bcd4-a605-47d3-b3f3-15440d4c2440"],
+Cell[2567, 80, 218, 4, 34, "Text",ExpressionUUID->"d08ca777-30c5-47d7-91c9-af22d6d4dd45"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2822, 89, 299, 5, 67, "Section",ExpressionUUID->"2b9bce55-f49b-4cb3-9483-94f3e5c81901"],
+Cell[3124, 96, 243, 4, 34, "Text",ExpressionUUID->"3dbcce92-2cae-4548-9971-649cab39463c"],
+Cell[3370, 102, 153, 6, 56, "Text",ExpressionUUID->"4984960a-3fe1-4dcb-95bb-3f3b233affb2"]
+}, Open  ]]
+}
+]
+*)
+

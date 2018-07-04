@@ -1,0 +1,102 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      3148,         94]
+NotebookOptionsPosition[      2547,         76]
+NotebookOutlinePosition[      2888,         91]
+CellTagsIndexPosition[      2845,         88]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"exampleFunction", "[", "string_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"stringWord", ",", "n", ",", "wordSplit"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"n", "=", "1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"wordSplit", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"stringWord", "=", "string"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"n", "-", "1"}], "\[NotEqual]", 
+        RowBox[{"StringLength", "[", "stringWord", "]"}]}], ",", 
+       RowBox[{"wordSplit", "=", 
+        RowBox[{
+         RowBox[{"Append", "[", 
+          RowBox[{"wordSplit", ",", 
+           RowBox[{"StringTake", "[", 
+            RowBox[{"stringWord", ",", 
+             RowBox[{"{", 
+              RowBox[{"n", ",", "n"}], "}"}]}], "]"}]}], "]"}], " ", 
+         RowBox[{"n", "++"}]}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+     "wordSplit"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.7392043954315386`*^9, 3.7392044100935464`*^9}},
+ CellLabel->
+  "In[152]:=",ExpressionUUID->"cb0dba71-e5b6-4cbf-aef3-ac0b4e065d65"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"exampleFunction", "[", "\"\<test\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.7392044118875413`*^9, 3.7392044160735703`*^9}},
+ CellLabel->
+  "In[153]:=",ExpressionUUID->"cdff81ae-49f5-410b-9474-e6bc0f3269dc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"24", " ", "\<\"t\"\>"}], ",", 
+   RowBox[{"24", " ", "\<\"e\"\>"}], ",", 
+   RowBox[{"12", " ", "\<\"s\"\>"}], ",", 
+   RowBox[{"4", " ", "\<\"t\"\>"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.739204416411539*^9},
+ CellLabel->
+  "Out[153]=",ExpressionUUID->"12f066a4-d293-4eea-af15-23e0bb4ae771"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7392044174145694`*^9, 
+  3.7392044181635714`*^9}},ExpressionUUID->"2ddc2a8e-6b19-4b4a-89c6-\
+baf323e04a42"]
+},
+WindowSize->{1484, 917},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 7, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[561, 20, 1202, 29, 124, "Input",ExpressionUUID->"cb0dba71-e5b6-4cbf-aef3-ac0b4e065d65"],
+Cell[CellGroupData[{
+Cell[1788, 53, 232, 4, 28, "Input",ExpressionUUID->"cdff81ae-49f5-410b-9474-e6bc0f3269dc"],
+Cell[2023, 59, 349, 9, 32, "Output",ExpressionUUID->"12f066a4-d293-4eea-af15-23e0bb4ae771"]
+}, Open  ]],
+Cell[2387, 71, 156, 3, 28, "Input",ExpressionUUID->"2ddc2a8e-6b19-4b4a-89c6-baf323e04a42"]
+}
+]
+*)
+
