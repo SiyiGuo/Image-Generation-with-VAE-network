@@ -35,10 +35,8 @@ z =TotalLayer[];
 
 decoder = NetChain[{
 512,
-BatchNormalizationLayer[],
 lrelu,
 8*16*16, 
-BatchNormalizationLayer[],
 lrelu,
 ReshapeLayer[{8,16,16}],
 DeconvolutionLayer[convChannel, {4,4}, "Stride"->2,"PaddingSize"->1],
@@ -128,12 +126,20 @@ trainingData =<|"random"->RandomVariate[NormalDistribution[],{Length@dataSets,nl
 "Input"->dataSets|>;
 
 
-trainedVae = NetTrain[vaeNet, trainingData, LossFunction->{"MeanLoss"->Scaled[1]},
-MaxTrainingRounds->500,
-TrainingProgressReporting->"Print",
+dir = CreateDirectory[]
+
+
+(*vaeNet*)
+SetDirectory[NotebookDirectory[]]
+continueVae = Import["smallMonet2.wlnet"]
+trainedVae = NetTrain[continueVae, trainingData, LossFunction->{"MeanLoss"->Scaled[1]},
+MaxTrainingRounds->1000,
+TrainingProgressReporting->"Panel",
 Method->{"ADAM", "LearningRate"->0.0005},
+TrainingProgressCheckpointing->{"Directory", dir, "Interval"->Quantity[10, "Rounds"]},
 TargetDevice->"GPU",
  BatchSize->32]
+ Export["smallMonet.wlnet", trainedVae]
 
 
 
