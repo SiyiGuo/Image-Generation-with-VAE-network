@@ -11,11 +11,9 @@ lrelu = ElementwiseLayer[Max[Ramp[#], #*0.3]&]
 encoder = NetChain[{
 ReshapeLayer[{3,width,width}],
 ConvolutionLayer[convChannel, kernel, "Stride"->2, "PaddingSize"->2],
-lrelu,
-DropoutLayer[],
+Tanh,
 ConvolutionLayer[convChannel, kernel, "Stride"->2, "PaddingSize"->2],
-lrelu,
-DropoutLayer[],
+Tanh,
 FlattenLayer[],
 576
 }]
@@ -31,18 +29,18 @@ z =TotalLayer[];
 
 decoder = NetChain[{
 576,
-lrelu,
+Tanh,
 768, 
-lrelu,
+Tanh,
 ReshapeLayer[{3,16,16}],
-DeconvolutionLayer[convChannel, 4, "Stride"->2,"PaddingSize"->2],
-Ramp,
+DeconvolutionLayer[64, 4, "Stride"->2,"PaddingSize"->2],
+Tanh,
 DropoutLayer[],
 DeconvolutionLayer[convChannel, 4, "Stride"->1,"PaddingSize"->2],
-Ramp,
+Tanh,
 FlattenLayer[],
 3*width,
-Ramp,
+Tanh,
 3*width*width,
 LogisticSigmoid,
 ReshapeLayer[{3,width,width}]
