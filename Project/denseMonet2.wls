@@ -7,6 +7,7 @@ convChannel = 64;
 kernel = 8;
 
 
+lrelu = ElementwiseLayer[Max[Ramp[#], #*0.3]&]
 encoder = NetChain[{
 ReshapeLayer[{3,width,width}],
 ConvolutionLayer[convChannel, kernel, "Stride"->2, "PaddingSize"->2],
@@ -18,10 +19,12 @@ FlattenLayer[],
 }]
 
 
+
 mn = LinearLayer[nlatent];
 sd= NetChain[{LinearLayer[nlatent],ElementwiseLayer[#*0.5&]}];
 expSd = ElementwiseLayer[Exp[#]&];
 z =TotalLayer[];
+
 
 
 decoder = NetChain[{
@@ -44,22 +47,34 @@ ReshapeLayer[{3,width,width}]
 }, "Input"->{nlatent}]
 
 
-imageLoss = MeanSquaredLossLayer[];
+
+imageLoss = NetGraph[
+{ElementwiseLayer[-1*# &, "Input"->{3,width,width}], TotalLayer[], ElementwiseLayer[#^2&], SummationLayer[]},
+{
+NetPort["inDec"]->1->2,
+NetPort["inInput"]->2,
+2->3->4
+}
+]
+
 
 
 latentLoss = NetGraph[
 {ElementwiseLayer[-0.5*#&], TotalLayer[], ElementwiseLayer[-(#^2)&], ElementwiseLayer[-Exp[2*#]&], ElementwiseLayer[1+2*#&],SummationLayer[]},
 {
 NetPort["mn"]->3,
-NetPort["sd"]->{4,5},
-{3,4,5}->2,
-2->6->1
+NetPort["sd"]->4,
+NetPort["sd"]->5,
+3->2,
+4->2,
+5->2,
+2->6,
+6->1
 }
-];
+]
 
 
-loss = ThreadingLayer[(#+#2*1*3*256*256)/2&, "Output"->"Real"];
-
+Echo["Before initializing the Net"]
 
 vaeNet = NetInitialize[NetGraph[
 <|"enc"->encoder,
@@ -68,8 +83,7 @@ vaeNet = NetInitialize[NetGraph[
 "z"->TotalLayer[],
 "dec"->decoder,
 "imageLoss"->imageLoss,
-"latentLoss"->latentLoss,
-"loss"->loss
+"latentLoss"->latentLoss
 |>,
 
 {
@@ -85,47 +99,38 @@ NetPort["Input"]->"enc",
 "sd"->NetPort["latentLoss","sd"],
 "mn"->NetPort["latentLoss","mn"],
 (*image loss*)
-"dec"->NetPort["imageLoss", "Input"],
-NetPort["Input"]->NetPort["imageLoss", "Target"],
-(*Total loss8*)
-"latentLoss"->NetPort["loss", "1"],
-"imageLoss"->NetPort["loss", "2"],
-"loss"->NetPort["MeanLoss"]
+"dec"->NetPort["imageLoss", "inDec"],
+NetPort["Input"]->NetPort["imageLoss", "inInput"],
+(*image loss8*)
+"latentLoss"->NetPort["latentLoss"],
+"imageLoss"->NetPort["imageLoss"]
 },
 "Output"->NetDecoder[{"Image", "RGB"}],
 "Input"->NetEncoder[{"Image", {width, width}, "RGB"}]
-]];
+]]
 
 
-Export["denseMonet.wlnet", vaeNet]
-
-
-imagePaths = 
-Join[
-Map[StringReplace[#, "\\"->"/"]&, FileNames["*.jpg","DataMonet"]],
-Map[StringReplace[#, "\\"->"/"]&, FileNames["*.jpg","DataLandScape"]],
-FileNames["*.jpg", "DataVanGh"],
+Echo["Getting image Path"]
+imagePaths = Joine[
+FileNames["*.jpg","DataMonet"],
+FileNames["*.jpg","DataLandScape"],
 FileNames["*.jpg", "DataCezanne"]
 ];
 dataSets = Map[Import[#]&, imagePaths];
+Echo[Length@dataSets]
+
+
 trainingData =<|"random"->RandomVariate[NormalDistribution[],{Length@dataSets,nlatent}],
 "Input"->dataSets|>;
-Echo[Length@dataSets];
 
 
-dir = CreateDirectory[];
+dir = CreateDirectory[]
 Echo[dir];
-
-
-SetDirectory[NotebookDirectory[]]
-trainedVae = NetTrain[vaeNet, trainingData, LossFunction->{"MeanLoss"->Scaled[1]},
+trainedVae = NetTrain[vaeNet, trainingData, LossFunction->{"latentLoss"->Scaled[1], "imageLoss"->Scaled[1]},
 MaxTrainingRounds->2000,
 TrainingProgressReporting->"Print",
+Method->{"ADAM", "LearningRate"->0.00005},
 TargetDevice->"GPU",
-Method->{"ADAM", "LearningRate"->0.0005},
-TrainingProgressCheckpointing->{"Directory", dir, "Interval"->Quantity[50, "Rounds"]},
- BatchSize->64];
- Export["denseMonet.wlnet", trainedVae];
-
-
-
+TrainingProgressCheckpointing->{"Directory", dir, "Interval"->Quantity[100, "Rounds"]},
+ BatchSize->32];
+Export["monetVae.wlnet", trainedVae];

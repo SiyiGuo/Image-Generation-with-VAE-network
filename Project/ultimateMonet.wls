@@ -7,9 +7,9 @@ convChannel = 64;
 kernel = 8;
 
 
-convIN[args___]:={ConvolutionLayer[args],InstanceNormalizationLayer["Epsilon"->0.00001]}
-convINlrelu[args___]:={ConvolutionLayer[args],InstanceNormalizationLayer["Epsilon"->0.00001],Tanh}
-convINRamp[args___]:={ConvolutionLayer[args],InstanceNormalizationLayer["Epsilon"->0.00001],ElementwiseLayer[Tanh]}
+convIN[args___]:={ConvolutionLayer[args]}
+convINlrelu[args___]:={ConvolutionLayer[args]Tanh}
+convINRamp[args___]:={ConvolutionLayer[args],Tanh}
 residualModule=NetGraph[
 {
 NetChain@Join[{PaddingLayer[{{0,0},{1,1},{1,1}},"Padding"->"Reflected"]},convINRamp[128,3],{PaddingLayer[{{0,0},{1,1},{1,1}},"Padding"->"Reflected"]},convIN[128,3]],
@@ -64,9 +64,6 @@ Tanh,
 DeconvolutionLayer[128, 2, "Stride"->2],
 BatchNormalizationLayer[],
 Tanh,
-DeconvolutionLayer[256, 2, "Stride"->2],
-BatchNormalizationLayer[],
-Tanh,
 DeconvolutionLayer[32, 1, "Stride"->1],
 BatchNormalizationLayer[],
 Tanh,
@@ -89,7 +86,7 @@ NetPort["sd"]->{4,5},
 ];
 
 
-loss = ThreadingLayer[(#+#2*1*3*256*256)/2&, "Output"->"Real"];
+loss = ThreadingLayer[(#+#2*3*256*256)/2&, "Output"->"Real"];
 
 
 vaeNet = NetInitialize[NetGraph[
